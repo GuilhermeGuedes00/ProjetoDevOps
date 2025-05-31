@@ -34,5 +34,17 @@
     "experience": "Jogo incrivel, historia magnifica e não veja a serie.",
     "rating": 5,
     "difficulty": "medium"
+  },
+  {
+    "id": 1748372500000,
+    "title": "Hollow Knight",
+    "platform": "PC",
+    "platinum": true,
+    "completed": true,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4f/Hollow_Knight_cover_art.jpg/220px-Hollow_Knight_cover_art.jpg",
+    "hours": "70h",
+    "experience": "Uma obra-prima de Metroidvania. Arte incrível, trilha sonora envolvente e um desafio justo.",
+    "rating": 5,
+    "difficulty": "hard"
   }
 ]
