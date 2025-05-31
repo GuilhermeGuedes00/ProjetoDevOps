@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Stardew Valley",
+    "platform": "PC",
+    "platinum": true,
+    "completed": true,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/pt/f/fd/Logo_of_Stardew_Valley.png",
+    "hours": "200h+",
+    "experience": "Um jogo relaxante e viciante! Passei centenas de horas construindo minha fazenda e me tornando amigo dos moradores. A trilha sonora é incrível.",
+    "rating": 5,
+    "difficulty": "easy"
+  },
+  {
+    "id": 1748372345691,
+    "title": "Mortal Kombat 11",
+    "platform": "PS5",
+    "platinum": false,
+    "completed": true,
+    "imageUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202010/2000/aPVbncDz3LjjQpNQW6LhzNSK.jpg?w=1920&thumb=false",
+    "hours": "8 horas",
+    "experience": "",
+    "rating": 4,
+    "difficulty": "hard"
+  },
+  {
+    "id": 1748372435796,
+    "title": "The last of us 2 ",
+    "platform": "PS5",
+    "platinum": false,
+    "completed": true,
+    "imageUrl": "https://gmedia.playstation.com/is/image/SIEPDC/The-last-of-us-part-ii-remastered-hero-banner-desktop-02-en-16mar23?$1600px$",
+    "hours": "30 horas",
+    "experience": "Jogo incrivel, historia magnifica e não veja a serie.",
+    "rating": 5,
+    "difficulty": "medium"
+  }
+]

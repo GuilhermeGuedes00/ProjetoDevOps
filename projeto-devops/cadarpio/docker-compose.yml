@@ -1,0 +1,20 @@
+version: '3.8' # Versão da especificação do Docker Compose
+
+services:
+  # Define um serviço chamado 'webapp' (você pode dar o nome que quiser)
+  webapp:
+    # Diz ao Docker Compose para construir a imagem a partir do Dockerfile no diretório atual
+    build: .
+    # Mapeia a porta 3000 do contêiner para a porta 3000 da sua máquina host
+    # Isso permite que você acesse a aplicação em http://localhost:3000
+    ports:
+      - "3000:3000"
+    # Monta um volume para persistir o arquivo games.json
+    # Isso garante que mesmo se o contêiner for removido, seus dados em games.json não serão perdidos.
+    # O volume 'data_volume' será criado automaticamente pelo Docker.
+    volumes:
+      - data_volume:/app/data
+
+# Define os volumes que serão usados pelos serviços
+volumes:
+  data_volume:

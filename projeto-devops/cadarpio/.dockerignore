@@ -1,0 +1,9 @@
+.git
+.gitignore
+node_modules
+npm-debug.log
+.env
+.next
+# Se você tiver alguma pasta de upload de imagens que não deva ir para a imagem de build
+# Por exemplo, se você for persistir imagens localmente
+# public/uploads
