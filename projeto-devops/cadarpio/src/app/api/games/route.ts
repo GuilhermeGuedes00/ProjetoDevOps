@@ -1,55 +1,42 @@
-// app/api/games/route.js
-import { promises as fs } from 'fs';
-import path from 'path';
+import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
-const filePath = path.join(process.cwd(), 'data', 'games.json');
+const supabaseUrl = process.env.SUPABASE_URL || 'https://mpkeehelfdxqejkisvmz.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wa2VlaGVsZmR4cWVqa2lzdm16Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4MTE2NTMsImV4cCI6MjA2NDM4NzY1M30.8X0Y1JejP228mPDL0joqMbLY6VlgfDI7IPSgpVOwQRs';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Handler para requisições GET
+
 export async function GET(request) {
   try {
-    const jsonData = await fs.readFile(filePath, 'utf-8');
-    const games = JSON.parse(jsonData);
-    return NextResponse.json(games, { status: 200 });
+    const { data, error } = await supabase
+      .from('games')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) throw error;
+
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error("Erro ao ler games.json:", error);
-    // Se o arquivo não existir ou for inválido, retorne um array vazio ou um erro adequado
-    if (error.code === 'ENOENT') { // ENOENT significa "Error No ENTity" (arquivo não encontrado)
-      console.warn("games.json não encontrado. Retornando array vazio.");
-      return NextResponse.json([], { status: 200 });
-    }
+    console.error("Erro ao buscar jogos:", error);
     return NextResponse.json({ message: 'Erro ao carregar os jogos.' }, { status: 500 });
   }
 }
 
-// Handler para requisições POST
+
 export async function POST(request) {
   try {
     const newGame = await request.json();
+    
+    const { data, error } = await supabase
+      .from('games')
+      .insert([newGame])
+      .select();
 
-    // Adicione um ID único ao novo jogo (exemplo simples com timestamp)
-    const gameWithId = { id: Date.now(), ...newGame };
+    if (error) throw error;
 
-    let games = [];
-    try {
-      const jsonData = await fs.readFile(filePath, 'utf-8');
-      games = JSON.parse(jsonData);
-    } catch (readError) {
-      // Se o arquivo não existir ou for inválido, comece com um array vazio
-      if (readError.code === 'ENOENT') {
-        console.warn("games.json não encontrado ao tentar ler para POST. Criando um novo array.");
-        games = [];
-      } else {
-        throw readError; // Re-lança outros erros de leitura
-      }
-    }
-
-    games.push(gameWithId); // Adiciona o novo jogo
-
-    await fs.writeFile(filePath, JSON.stringify(games, null, 2)); // Salva o array atualizado
-    return NextResponse.json(gameWithId, { status: 201 }); // Retorna o jogo adicionado com ID
+    return NextResponse.json(data[0], { status: 201 });
   } catch (error) {
-    console.error("Erro ao escrever em games.json:", error);
+    console.error("Erro ao adicionar jogo:", error);
     return NextResponse.json({ message: 'Erro ao adicionar o jogo.' }, { status: 500 });
   }
 }

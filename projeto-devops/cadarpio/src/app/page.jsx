@@ -42,17 +42,7 @@ export default function Home() {
   }, []); // Empty dependency array means this runs once on mount
   // --- END: ADDED CODE ---
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setNewGame({ ...newGame, imageFile: file, imageUrl: '' });
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+
 
   const handleRemoveImage = () => {
     setNewGame({ ...newGame, imageUrl: '', imageFile: null });
@@ -247,21 +237,9 @@ const handleSubmit = async (e) => {
                       </div>
                     )}
                     
-                    {/* Upload de arquivo */}
-                    <div className="mb-3">
-                      <label className="flex items-center justify-center gap-2 p-3 bg-gray-700 hover:bg-gray-600 rounded-lg cursor-pointer transition-all duration-300 hover:shadow-lg">
-                        <FaImage className="text-purple-400 text-lg" />
-                        <span className="font-medium">Selecionar arquivo</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageChange}
-                          className="hidden"
-                        />
-                      </label>
-                    </div>
+              
                     
-                    {/* Ou URL */}
+            
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <span className="text-gray-400 text-sm">ou</span>
